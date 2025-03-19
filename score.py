@@ -2,7 +2,7 @@
 import yaml
 from pathlib import Path
 filepath = Path(__file__)
-root = filepath.parents[1]
+root = filepath.parent
 
 # Initial score
 score = 0
