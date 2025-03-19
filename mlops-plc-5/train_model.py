@@ -8,7 +8,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
 
-# Load dataset as pandas dataframe
+# Load dataset "Churn_Modeling.csv" as pandas dataframe
 df = pd.read_csv("Churn_Modeling.csv")
 df.head()
 
@@ -20,75 +20,58 @@ y = df[["Exited"]]
 
 # Handling category labels present in `Geography` and `Gender` columns
 # Get the distinct categories present in each categorical column
-# print(X['Geography'].unique())
-# print(X['Gender'].unique())
+# YOUR CODE HERE..
 
 # Create dictionaries to map categorical values to numberic labels. OR Use LabelEncoder
-geography_mapping = {'France': 0, 'Spain': 1, 'Germany': 2}
-gender_mapping = {'Female': 0, 'Male': 1}
+# YOUR CODE HERE..
 
-# Map categorical values to numbers using respective dictionaries
-X['Geography'] = X['Geography'].map(geography_mapping)
-X['Gender'] = X['Gender'].map(gender_mapping)
+# Map categorical values to numberic labels using respective dictionaries
+# YOUR CODE HERE..
 
 # Split data into training (80%) and test (20%) sets
 # Use random_state and stratify parameters
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=3, stratify=y)
+# YOUR CODE HERE
 
-# Save training and test sets as train.csv & test.csv inside data/ directory
-train_data = X_train.copy()
-train_data["Exited"] = y_train
-
-test_data = X_test.copy()
-test_data["Exited"] = y_test
-
-train_data.to_csv('data/train.csv', index=False)
-test_data.to_csv('data/test.csv', index=False)
+# Save training and test sets into `data/train.csv` & `data/test.csv`
+# YOUR CODE HERE..
+# YOUR CODE HERE..
 
 
 # Model Training
-# Create Random Forest Classifier model with n_estimators=100
-rf_model = RandomForestClassifier(n_estimators=100)
-rf_model.fit(X_train, y_train.values.ravel())
+# Create Random Forest Classifier model with n_estimators=100, and fit it on the training set
+# YOUR CODE HERE..
 
-# Evaluate the model performance on test set
-y_pred = rf_model.predict(X_test)
-acc = accuracy_score(y_test, y_pred)
-print(f"Accuracy: {acc}")
+# Evaluate the model performance(accuracy score) on test set
+# YOUR CODE HERE..
 
 
 # Save Actual and Predicted labels for test set into `model/predictions.csv`
-pred_data = pd.DataFrame({'Actual': y_test.values.ravel(),
-                          'Predicted': y_pred})
-pred_data.to_csv("model/predictions.csv", index=False)
+# Hint: Create a dataframe having actual and predictes labels as columns, then save it to the csv file.
+# YOUR CODE HERE..
 
 
-# Save model as pickle file inside model/ directory
-joblib.dump(rf_model, "model/my_model.pkl")
-print("Model saved successfully!")
+# Save the trained model as pickle file `model/my_model.pkl`
+# YOUR CODE HERE
 
 
 ###################  MLflow related code below  ###############################
 
-import mlflow
+# import mlflow
 
 # Start mlflow run
-mlflow.start_run()
+# mlflow.start_run()
 
 # Log parameter `n_estimator`
-mlflow.log_param("n_estimator", 100)
+# YOUR CODE HERE
 
 # Log metric `accuracy`
-mlflow.log_metric("accuracy", acc)
+# YOUR CODE HERE
 
 # Log artifacts - `data/train.csv`, `data/test.csv`, and `model/predictions.csv`
-mlflow.log_artifact("data/train.csv")
-mlflow.log_artifact("data/test.csv")
-mlflow.log_artifact("model/predictions.csv")
+# YOUR CODE HERE...
 
 # Log model
-mlflow.sklearn.log_model(rf_model, "random_forest_model")
+# YOUR CODE HERE
 
 # End mlflow run
-mlflow.end_run()
-
+# mlflow.end_run()
