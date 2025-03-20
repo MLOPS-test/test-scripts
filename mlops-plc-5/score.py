@@ -85,4 +85,5 @@ elif score > 20:
 else:
     score_pct = (score / 20) * 100
 
+print(f"Score given for challenge: {score}/20")
 print(f"Partial Credit: {score_pct}%")
