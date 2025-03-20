@@ -3,6 +3,7 @@ import yaml
 from pathlib import Path
 filepath = Path(__file__)
 root = filepath.parent
+#root = filepath.parents[1]
 
 # Initial score
 score = 0
@@ -13,8 +14,10 @@ test_file = Path(str(root) + "/" + "data/test.csv")
 
 if train_file.is_file():
     score += 3
+    print("Score given for creating train csv: 3")
 if test_file.is_file():
     score += 2
+    print("Score given for creating test csv: 2")
 
 # Check for saved model and predictions.csv
 pred_file = Path(str(root) + "/" + "model/predictions.csv")
@@ -22,10 +25,12 @@ model_path = Path(str(root) + "/" + "model")
 
 if pred_file.is_file():
     score += 2
+    print("Score given for creating predictions csv: 2")
 
 for file in model_path.iterdir():
     if file.is_file() and file.suffix == '.pkl':
         score += 3
+        print("Score given for saving model pkl: 3")
 
 
 # Check for logged parameter in mlflow
@@ -55,19 +60,23 @@ if exp_path.exists():      # if mlruns/0 exists
             if subdir.name == 'params':
                 if any(subdir.iterdir()):     # if directory is not empty
                     score += 2
+                    print("Score given for logging n_estimator param with mlflow: 2")
             if subdir.name == 'metrics': 
                 if any(subdir.iterdir()):     # if directory is not empty
                     score += 2
+                    print("Score given for logging accuracy metric with mlflow: 2")
             if subdir.name == 'artifacts':    # if directory is not empty
                 if any(subdir.iterdir()):
                     for artifact_file in subdir.iterdir():
                         if artifact_file.is_file() and artifact_file.suffix == '.csv':      # check for logged CSVs
                             #print("score added for ", artifact_file.name)
                             score += 1
+                            print(f"Score given for logging {artifact_file.name} csv with mlflow: 1")
                         if artifact_file.is_dir():
                             for sub_art_file in artifact_file.iterdir():
                                 if sub_art_file.is_file() and sub_art_file.suffix == '.pkl':  # check for logged model
                                     score += 3
+                                    print("Score given for logging model pkl with mlflow: 3")
 
 if score < 0:
     score_pct = 0
@@ -77,4 +86,3 @@ else:
     score_pct = (score / 20) * 100
 
 print(f"Partial Credit: {score_pct}%")
-
