@@ -123,7 +123,7 @@ print("--------- Build Test Cases (`test/test_prediction.py`) [4 Marks] --------
 
 # Check for test_model_accuracy() test case:
 try:
-    result = subprocess.run(['pytest', 'tests/test_prediction.py::test_model_accuracy'], capture_output=True, text=True)
+    result = subprocess.run(['python3', '-m', 'pytest', 'tests/test_prediction.py::test_model_accuracy'], capture_output=True, text=True)
     #print(result.stdout)
     #print(result.stderr)
     if result.returncode == 0:
@@ -137,7 +137,7 @@ except Exception as e:
 
 # Check for test_make_prediction() test case:
 try:
-    result = subprocess.run(['pytest', 'tests/test_prediction.py::test_make_prediction_function'], capture_output=True, text=True)
+    result = subprocess.run(['python3', '-m', 'pytest', 'tests/test_prediction.py::test_make_prediction_function'], capture_output=True, text=True)
     #print(result.stdout)
     #print(result.stderr)
     if result.returncode == 0:
@@ -187,8 +187,8 @@ try:
     else:
         print("[ERROR]: Error in FastAPI implementation `app.py`")
 
-except:
-    print("[ERROR]: Error in FastAPI implementation `app.py`. May be `/predict` endpoint NOT DEFINED")
+except Exception as e:
+    print("[ERROR]: Error in FastAPI implementation `app.py`. ", e)
     pass
 
 
