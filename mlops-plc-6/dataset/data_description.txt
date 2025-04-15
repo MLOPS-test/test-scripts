@@ -1,0 +1,18 @@
+about the features: 
+
+  age -	Age of the client
+  job -	Job type or profession of the client
+  marital -	Marital status of the client
+  education -	Education level of the client
+  balance -	Average yearly balance in euros
+  default -	Indicates if the client has credit in default (yes/no)
+  housing -	Indicates if the client has a housing loan (yes/no)
+  loan -	Indicates if the client has a personal loan (yes/no)
+  day -	Last contact day of the month
+  month -	Last contact month
+  duration -	Duration of the last contact in seconds
+  campaign -	Number of contacts performed during this campaign for this client
+  pdays -	Number of days since the client was last contacted (or -1 if not previously contacted)
+  previous -	Number of contacts performed before this campaign
+
+  y	(Target variable): Whether the client subscribed to the product (yes=1, no=0)
