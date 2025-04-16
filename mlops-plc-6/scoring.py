@@ -273,7 +273,7 @@ def check_container():
     # Run the Docker container
     #print("Running Docker container...")
     try:
-        container = subprocess.Popen(['docker', 'run', '-d', '-p', '8080:8080', 'diamond-clubs'], stdout=subprocess.PIPE)
+        container = subprocess.Popen(['docker', 'run', '-d', '-p', '8085:8080', 'diamond-clubs'], stdout=subprocess.PIPE)
         container_id = container.stdout.read().strip().decode('utf-8')
         #print(f"Container started with ID: {container_id}")
     except Exception as e:
@@ -303,7 +303,7 @@ def check_container():
             'pdays': -1,
             'previous': 0
         }
-        response = requests.post('http://localhost:8080/predict', json=payload)
+        response = requests.post('http://localhost:8085/predict', json=payload)
 
         if response.json()["prediction"] in ["Subscribed (y=1)", "Not Subscribed (y=0)"]:
             score += 1
@@ -318,6 +318,7 @@ def check_container():
         # Stop and remove the Docker container
         _ = subprocess.run(['docker', 'stop', container_id], capture_output=True, text=True)
         _ = subprocess.run(['docker', 'rm', container_id], capture_output=True, text=True)
+        _ = subprocess.run(['docker', 'rmi', 'diamond-clubs'], capture_output=True, text=True)
 
 
 check_container()
