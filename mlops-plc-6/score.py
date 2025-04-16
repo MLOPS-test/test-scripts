@@ -105,7 +105,7 @@ try:
     print("Points given for loading the model pkl: 1")
 except:
     pass
-    print("[ERRROR]: Model not loaded in predict.py")
+    print("[ERROR]: Model not loaded in predict.py")
 
 try:
     from predict import make_prediction, sample_input_df
@@ -115,7 +115,7 @@ try:
         print("Points given for make_prediction() func: 1")
 except:
     pass
-    print("[ERRROR]: make_prediction() function not completed in predict.py")
+    print("[ERROR]: make_prediction() function not completed in predict.py")
 
 
 # Evaluate pytest tests
