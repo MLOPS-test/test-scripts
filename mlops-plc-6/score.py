@@ -33,7 +33,7 @@ if encoder_file.is_file():
 else:
     print("[ERROR]: `trained_model/label_encoders.pkl` <-- FILE DOES NOT EXIST")
 
-print("--------- Train a Machine Learning Model (`train_model.py`) [4 Marks] ---------")
+print("\n--------- Train a Machine Learning Model (`train_model.py`) [4 Marks] ---------")
 
 model_file = Path(str(root) + "/" + "trained_model/rf_model_term_deposit.pkl")
 
@@ -96,7 +96,7 @@ else:
 
 
 # Evaluate Inference - predict.py
-print("--------- Make Predictions - Inference (`predict.py`) [2 Marks] ---------")
+print("\n--------- Make Predictions - Inference (`predict.py`) [2 Marks] ---------")
 
 # Check for `predict.py`
 try:
@@ -119,7 +119,7 @@ except:
 
 
 # Evaluate pytest tests
-print("--------- Build Test Cases (`test/test_prediction.py`) [4 Marks] ---------")
+print("\n--------- Build Test Cases (`test/test_prediction.py`) [4 Marks] ---------")
 
 # Check for test_model_accuracy() test case:
 try:
@@ -150,7 +150,7 @@ except Exception as e:
 
 
 # Serve the Model via REST API using FastAPI (`app.py`) [4 Marks]
-print("--------- Serve the Model via REST API using FastAPI (`app.py`) [4 Marks] ---------")
+print("\n--------- Serve the Model via REST API using FastAPI (`app.py`) [4 Marks] ---------")
 
 try:
     install_httpx = subprocess.run(['pip', 'install', 'httpx'], capture_output=True, text=True)
@@ -193,7 +193,7 @@ except Exception as e:
 
 
 # Dockerize the FastAPI Application [4 Marks]
-print("--------- Dockerize the FastAPI Application [4 Marks] ---------")
+print("\n--------- Dockerize the FastAPI Application [4 Marks] ---------")
 
 
 # Define the required Dockerfile keywords (some are alternatives)
