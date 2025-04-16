@@ -110,7 +110,7 @@ except:
 try:
     from predict import make_prediction, sample_input_df
     sample_pred = make_prediction(sample_input_df)
-    if sample_pred in ["Subscribed (y=1)", "Not Subscribed (y=0)"]:
+    if sample_pred in ["Subscribe (y=1)", "Not Subscribe (y=0)"]:
         score += 1
         print("Points given for make_prediction() func: 1")
 except:
@@ -179,7 +179,7 @@ try:
 
     response = client.post("/predict", json=payload)
 
-    if response.json()["prediction"] in ["Subscribed (y=1)", "Not Subscribed (y=0)"]:
+    if response.json()["prediction"] in ["Subscribe (y=1)", "Not Subscribe (y=0)"]:
         score += 4
         print("Points given for FastAPI implementation: 4")
     elif response.json()["prediction"] == "Update this variable":
@@ -305,7 +305,7 @@ def check_container():
         }
         response = requests.post('http://localhost:8085/predict', json=payload)
 
-        if response.json()["prediction"] in ["Subscribed (y=1)", "Not Subscribed (y=0)"]:
+        if response.json()["prediction"] in ["Subscribe (y=1)", "Not Subscribe (y=0)"]:
             score += 1
             print("Points given for successfully running application in docker container: 1")
         elif response.json()["prediction"] == "Update this variable":

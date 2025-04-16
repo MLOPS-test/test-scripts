@@ -42,11 +42,11 @@ def preprocess_input(data: TermDepositInput):
 
 
 # Create a POST endpoint `/predict` that should take input the data of type `TermDepositInput` via request body,
-# and return the prediction response in a JSON format. For example: `{"prediction": "Subscribed (y=1)"}`
+# and return the prediction response in a JSON format. For example: `{"prediction": "Subscribe (y=1)"}`
 # The data must be processed using `preprocess_input()` function before feeding to the model for prediction.
 # Output should be either of the below: 
-# {"prediction": "Subscribed (y=1)"} or 
-# {"prediction": "Not Subscribed (y=0)"}
+# {"prediction": "Subscribe (y=1)"} or 
+# {"prediction": "Not Subscribe (y=0)"}
 
 @app.post("/predict")
 def predict_deposit(data: TermDepositInput):
