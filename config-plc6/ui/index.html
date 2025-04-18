@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Banking App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>🏦 Simple Banking Dashboard</h1>
+
+    <div class="container">
+        <p><strong>Balance:</strong> ₹<span id="balance">0.00</span></p>
+
+        <div class="form-group">
+            <label>Amount:</label>
+            <input type="number" id="amount" />
+        </div>
+
+        <button onclick="deposit()">Deposit</button>
+        <button onclick="withdraw()">Withdraw</button>
+
+        <p id="message"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
