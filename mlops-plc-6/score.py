@@ -47,52 +47,57 @@ else:
 # Check for logged parameter in mlflow
 exp_path = Path(str(root) + "/" + "mlruns/0")
 
-if exp_path.exists():      # if mlruns/0 exists
+try:
+    if exp_path.exists():      # if mlruns/0 exists
 
-    exp_dict = {}
+        exp_dict = {}
 
-    for subpath in exp_path.iterdir():         # 0/*
-        if subpath.is_dir():
-            for subdir in subpath.iterdir():
-                if subdir.is_file():              # 0/*/meta.yaml
-                    # Load the YAML file
-                    with open(subdir, 'r') as file:
-                        data = yaml.safe_load(file)
-                        start_time = data['start_time']
-                        exp_dict[start_time] = subpath
-                        # print(subpath, start_time)
+        for subpath in exp_path.iterdir():         # 0/*
+            if subpath.is_dir():
+                for subdir in subpath.iterdir():
+                    if subdir.is_file():              # 0/*/meta.yaml
+                        # Load the YAML file
+                        with open(subdir, 'r') as file:
+                            data = yaml.safe_load(file)
+                            start_time = data['start_time']
+                            exp_dict[start_time] = subpath
+                            # print(subpath, start_time)
 
-    run_path = exp_dict[max(exp_dict.keys())]      # latest run
-    #print("run path:", run_path)
-    
-    # Check the run folder for logged params, metrics, artifacts
-    for subdir in run_path.iterdir():
-        if subdir.is_dir():
-            if subdir.name == 'params':
-                if any(subdir.iterdir()):     # if directory is not empty
-                    score += 1
-                    print("Points given for logging parameters with mlflow: 1")
-                else:
-                    print("[ERROR]: Parameters NOT LOGGED with MLflow")
-            if subdir.name == 'metrics': 
-                if any(subdir.iterdir()):     # if directory is not empty
-                    score += 1
-                    print("Points given for logging metrics with mlflow: 1")
-                else:
-                    print("[ERROR]: Metrics NOT LOGGED with MLflow")
-            if subdir.name == 'artifacts':    # if directory is not empty
-                if any(subdir.iterdir()):
-                    for artifact_file in subdir.iterdir():
-                        if artifact_file.is_dir():
-                            for sub_art_file in artifact_file.iterdir():
-                                if sub_art_file.is_file() and sub_art_file.suffix == '.pkl':  # check for logged model
-                                    score += 1
-                                    print("Points given for logging model pkl with mlflow: 1")
-                else:
-                    print("[ERROR]: Model NOT LOGGED with MLflow")
+        run_path = exp_dict[max(exp_dict.keys())]      # latest run
+        #print("run path:", run_path)
+        
+        # Check the run folder for logged params, metrics, artifacts
+        for subdir in run_path.iterdir():
+            if subdir.is_dir():
+                if subdir.name == 'params':
+                    if any(subdir.iterdir()):     # if directory is not empty
+                        score += 1
+                        print("Points given for logging parameters with mlflow: 1")
+                    else:
+                        print("[ERROR]: Parameters NOT LOGGED with MLflow")
+                if subdir.name == 'metrics': 
+                    if any(subdir.iterdir()):     # if directory is not empty
+                        score += 1
+                        print("Points given for logging metrics with mlflow: 1")
+                    else:
+                        print("[ERROR]: Metrics NOT LOGGED with MLflow")
+                if subdir.name == 'artifacts':    # if directory is not empty
+                    if any(subdir.iterdir()):
+                        for artifact_file in subdir.iterdir():
+                            if artifact_file.is_dir():
+                                for sub_art_file in artifact_file.iterdir():
+                                    if sub_art_file.is_file() and sub_art_file.suffix == '.pkl':  # check for logged model
+                                        score += 1
+                                        print("Points given for logging model pkl with mlflow: 1")
+                    else:
+                        print("[ERROR]: Model NOT LOGGED with MLflow")
 
-else:
+    else:
+        print("[ERROR]: LOGGING with MLflow NOT IMPLEMENTED")
+
+except:
     print("[ERROR]: LOGGING with MLflow NOT IMPLEMENTED")
+
 
 
 # Evaluate Inference - predict.py
