@@ -194,10 +194,10 @@ check_dockerfile()
 # Check Docker Image
 try:
     result = subprocess.run(['docker', 'images', '-q'], capture_output=True, text=True)
-    print(f"\n result: {result}\n")
+    # print(f"\n result: {result}\n")
     output = result.stdout.strip()
-    print(f"\n output: {output}\n")
-    if output:
+    # print(f"\n output: {output}\n")
+    if output != '39fb37016d73\nf35a5d5fa327':
         score += 1
         print(f"Points given for building Docker image: 1")
     else:
