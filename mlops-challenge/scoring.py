@@ -40,7 +40,7 @@ model_file = Path(str(root) + "/" + "trained_model/rf_model_term_deposit.pkl")
 
 if model_file.is_file():
     score += 3
-    print("Points given for saving rf_model_term_deposit.pkl: 1")
+    print("Points given for saving rf_model_term_deposit.pkl: 3")
 else:
     print("[ERROR]: `trained_model/rf_model_term_deposit.pkl` <-- FILE DOES NOT EXIST")
 
@@ -63,7 +63,7 @@ try:
     sample_pred = make_prediction(sample_input_df)
     if sample_pred in ["Subscribe (y=1)", "Not Subscribe (y=0)"]:
         score += 2
-        print("Points given for make_prediction() func: 1")
+        print("Points given for make_prediction() func: 2")
 except:
     pass
     print("[ERROR]: make_prediction() function not completed in predict.py")
